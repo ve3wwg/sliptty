@@ -1,0 +1,27 @@
+######################################################################
+#  teensy3_lib/posix/sliptty/Makefile.posix
+#  Warren Gay ve3wwg	Mon May 19 09:20:45 2014
+######################################################################
+
+include ../Makefile.conf
+
+C_FILES 	:= $(wildcard *.c)
+CPP_FILES 	:= $(wildcard *.cpp)
+OBJS 		:= $(C_FILES:.c=.o) $(CPP_FILES:.cpp=.o)
+
+all:	$(TOP_DIR)/lib/libteensy.a
+
+sliptty.o: sliptty.hpp sliptty.cpp Makefile Makefile.posix
+
+$(TOP_DIR)/lib/libteensy.a: sliptty.o
+	$(AR) r $(TOP_DIR)/lib/libteensy.a sliptty.o
+
+check:
+
+clean:
+	rm -f *.o *.d t1.t t2.t t3.t testsliptty
+
+distclean: clean
+	rm -f $(TOP_DIR)/libteensy.a testsliptty errs.t
+
+# End posix/sliptty/Makefile.posix
