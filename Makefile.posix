@@ -9,12 +9,10 @@ C_FILES 	:= $(wildcard *.c)
 CPP_FILES 	:= $(wildcard *.cpp)
 OBJS 		:= $(C_FILES:.c=.o) $(CPP_FILES:.cpp=.o)
 
-all:	$(TOP_DIR)/lib/libteensy.a
+all:	$(OBJS)
+	$(AR) r $(TOP_DIR)/lib/libteensy.a $(OBJS)
 
 sliptty.o: sliptty.hpp sliptty.cpp Makefile Makefile.posix
-
-$(TOP_DIR)/lib/libteensy.a: sliptty.o
-	$(AR) r $(TOP_DIR)/lib/libteensy.a sliptty.o
 
 check:
 
